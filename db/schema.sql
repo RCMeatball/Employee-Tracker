@@ -43,4 +43,14 @@ INSERT INTO role (title, salary, department_id) VALUES
 ('Accountant', 125000, 1),
 ('Account Manager', 160000, 1),
 ('Sales Lead', 100000, 2),
-('Salesperson', 80000)
+('Salesperson', 80000, 2);
+
+INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES
+('John','Doe', 7, null)
+('Mike','Chan', 8, 1)
+('Ashley','Rodriguez', 3, null)
+('Kevin','Tupik', 4, 3)
+('Kunal','Singh', 6, null)
+('Malia','Brown', 5, 5)
+('Sarah','Lourd', 2, null)
+('Tom','Allen', 1, 7);
