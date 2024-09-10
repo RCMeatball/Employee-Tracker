@@ -123,7 +123,7 @@ const addEmployee = () => {
       ])
       .then((answers) => {
         const { firstName, lastName, roleId, managerId } = answers;
-        pool.query('INSERT INTO employee (first_name, last_name, role_Id, manager_Id) VALUES'
+        pool.query('INSERT INTO employee (first_name, last_name, role_Id, manager_Id) VALUES(?, ?, ?, ?)'
             [firstName, lastName, roleId, managerId],
             (err, res) => {
                 if (err) {
@@ -158,7 +158,7 @@ const addEmployee = () => {
         .then((answers) => {
             const { roleTitle, roleDepartment, roleSalary } = answers;
             pool.query(
-                'INSERT INTO role (title, department_id, salary) VALUES',
+                'INSERT INTO role (title, department_id, salary) VALUES(?, ?, ?)',
                 [roleTitle, roleDepartment, roleSalary],
                 (err, res) => {
                     if (err) {
@@ -182,7 +182,7 @@ const addEmployee = () => {
         ])
         .then((answers) => {
             const { departmentName } = answers;
-            pool.query('INSERT INTO department (name) VALUES',
+            pool.query('INSERT INTO department (name) VALUES(?)',
                 [departmentName],
                 (err, res) => {
                     if (err) {
@@ -195,3 +195,35 @@ const addEmployee = () => {
             );
         });
     };
+
+    const updateEmployeeRole = () => {
+        inquirer.prompt([
+            {
+                type: "input",
+                name: "employeeId",
+                message: "Enter ID for employee to be updated"
+            },
+            {
+                type: "input",
+                name: "newRoleId",
+                message: "Enter the employees new role ID"
+            }
+        ])
+        .then((answers) => {
+            const { employeeId, newRoleId } = answers;
+            pool.query(
+                "UPDATE employee SET role_id = ? WHERE id = ?",
+                [newRoleId, employeeId],
+                (err, res) => {
+                    if (err) {
+                        console.error(err);
+                        return;
+                    }
+                    console.log(`Updated Employee with ID ${employeeId} to their new role of ${newRoleId}`);
+                    employees_db();
+                }
+            );
+        });
+    };
+
+    employees_db();
