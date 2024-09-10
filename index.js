@@ -13,19 +13,18 @@ const pool = new Pool(
 pool.connect();
 
 const employees_db = () => {
-  inquirer
-    .prompt([
+  inquirer.prompt([
       {
         type: "list",
         name: "options",
         message: "What would you like to do?",
         choices: [
-          "View all departments",
-          "View all roles",
           "View all employees",
-          "Add a department",
-          "Add a role",
+          "View all roles",
+          "View all departments",
           "Add an employee",
+          "Add a role",
+          "Add a department",
           "Update an employee role",
         ],
       },
@@ -34,16 +33,16 @@ const employees_db = () => {
       const { options } = answers;
 
       switch (options) {
-        case "View Employees":
+        case "View all employees":
           viewEmployees();
           break;
-        case "View Roles":
+        case "View all roles":
           viewRoles();
           break;
-        case "View departments":
+        case "View all departments":
           viewDepartments();
           break;
-        case "Add a employee":
+        case "Add an employee":
           addEmployee();
           break;
         case "Add a role":
