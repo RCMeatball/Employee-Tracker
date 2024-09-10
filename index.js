@@ -60,35 +60,40 @@ const employees_db = () => {
 };
 
 const viewEmployees = () => {
-    pool.query("SELECT id, first_name, last_name, role_id, manager_id FROM employee", (err, res) => {
+  pool.query(
+    "SELECT id, first_name, last_name, role_id, manager_id FROM employee",
+    (err, res) => {
       if (err) {
         console.error(err);
         return;
       }
       console.log("Showing all employees");
       employees_db();
-    });
-  };
+    }
+  );
+};
 
-  const viewRoles = () => {
-    pool.query("SELECT id, title, salary, department_id FROM role", (err, res) => {
+const viewRoles = () => {
+  pool.query(
+    "SELECT id, title, salary, department_id FROM role",
+    (err, res) => {
       if (err) {
         console.error(err);
         return;
       }
       console.log("Showing all roles");
       employees_db();
-    });
-    
-  };
+    }
+  );
+};
 
-  const viewDepartments = () => {
-    pool.query("SELECT id, name FROM department", (err, res) => {
-      if (err) {
-        console.error(err);
-        return;
-      }
-      console.table(res.rows);
-      employees_db();
-    });
-  };
+const viewDepartments = () => {
+  pool.query("SELECT id, name FROM department", (err, res) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    console.table(res.rows);
+    employees_db();
+  });
+};
