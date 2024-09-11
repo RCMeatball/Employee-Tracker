@@ -12,51 +12,56 @@ const pool = new Pool(
 );
 pool.connect();
 
-const employees_db = () => {
-  inquirer.prompt([
-      {
-        type: "list",
-        name: "options",
-        message: "What would you like to do?",
-        choices: [
-          "View all employees",
-          "View all roles",
-          "View all departments",
-          "Add an employee",
-          "Add a role",
-          "Add a department",
-          "Update an employee role",
-        ],
-      },
-    ])
-    .then((answers) => {
+const employees_db = async () => {
+    try {
+      const answers = await inquirer.prompt([
+        {
+          type: "list",
+          name: "options",
+          message: "What would you like to do?",
+          choices: [
+            "View all employees",
+            "View all roles",
+            "View all departments",
+            "Add an employee",
+            "Add a role",
+            "Add a department",
+            "Update an employee role",
+          ],
+        },
+      ]);
+  
       const { options } = answers;
-
+  
       switch (options) {
         case "View all employees":
-          viewEmployees();
+          await viewEmployees(); // Ensure these functions return promises if they're async
           break;
         case "View all roles":
-          viewRoles();
+          await viewRoles();
           break;
         case "View all departments":
-          viewDepartments();
+          await viewDepartments();
           break;
         case "Add an employee":
-          addEmployee();
+          await addEmployee();
           break;
         case "Add a role":
-          addRole();
+          await addRole();
           break;
         case "Add a department":
-          addDepartment();
+          await addDepartment();
           break;
         case "Update an employee role":
-          updateEmployeeRole();
+          await updateEmployeeRole();
           break;
+        default:
+          console.log("Invalid option selected.");
       }
-    });
-};
+    } catch (error) {
+      console.error("Error during prompt", error);
+    }
+  };
 
 const viewEmployees = () => {
   pool.query(
