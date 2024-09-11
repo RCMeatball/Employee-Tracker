@@ -1,6 +1,6 @@
 # Employee Tracker
 
-An app that tracks employees and their roles, salaries, departments, and management. Also allows for creation of new employees, roles, and departments, as well as the ability to update a current employee
+An app that tracks employees and their roles, salaries, departments, and management. Also allows for creation of new employees, roles, and departments, as well as the ability to update a current employee.
 
 ## Installation
 ```
